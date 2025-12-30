@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2025 年终总结 · Tech Dashboard</title>
+
+  <!-- Tailwind + DaisyUI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      daisyui: { themes: ["dark"] },
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          dropShadow: { glow: "0 0 18px rgba(56,189,248,.65)" }
+        }
+      }
+    }
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" />
+
+  <!-- Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    body{
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(34,211,238,.22), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(168,85,247,.20), transparent 55%),
+        radial-gradient(900px 700px at 40% 92%, rgba(251,113,133,.14), transparent 55%),
+        linear-gradient(180deg, #060814, #0b1020 55%, #060814);
+    }
+    .noise{
+      position: fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.18;
+    }
+    #particles-js{ position: fixed; inset:0; z-index:0; }
+    .glass{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px);
+    }
+    .ring-glow{
+      box-shadow: 0 0 0 1px rgba(34,211,238,.25), 0 0 40px rgba(34,211,238,.12);
+    }
+    .gridline{
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
+      opacity:.45;
+    }
+    .shine{ position: relative; overflow:hidden; }
+    .shine:after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.10) 45%, transparent 55%);
+      transform: translateX(-80%);
+      animation: shine 4.2s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes shine{
+      0%{transform: translateX(-80%)}
+      50%{transform: translateX(80%)}
+      100%{transform: translateX(80%)}
+    }
+    @media print{
+      #particles-js,.noise,.grid-bg,.navbar,.fab{display:none!important}
+      body{background:white!important}
+      .glass{background:white!important; border:1px solid #eee!important}
+      *{color:#111!important}
+    }
+  </style>
+</head>
+
+<body class="font-sans text-base-content">
+  <div id="particles-js"></div>
+  <div class="noise"></div>
+  <div class="grid-bg fixed inset-0 z-[1] pointer-events-none gridline"></div>
+
+  <!-- 顶部导航栏 -->
+  <div class="navbar sticky top-0 z-30">
+    <div class="mx-auto max-w-6xl px-4 py-3 w-full">
+      <div class="glass ring-glow rounded-2xl px-4 py-3 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400/80 to-fuchsia-500/70 grid place-items-center">
+            <i class="fa-solid fa-sparkles text-white"></i>
+          </div>
+          <div>
+            <div class="text-sm opacity-70">YEAR IN REVIEW</div>
+            <div class="font-bold tracking-tight">2025 年终总结</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap justify-end">
+          <a class="btn btn-sm glass btn-ghost" href="index.html">
+            <i class="fa-solid fa-grid-2 mr-2"></i>年终总结
+          </a>
+          <a class="btn btn-sm glass btn-ghost" href="gallery.html">
+            <i class="fa-regular fa-images mr-2"></i>照片回忆
+          </a>
+          <!-- <button id="btnEdit" class="btn btn-sm btn-ghost glass">可编辑：开</button> -->
+          <!-- <button id="btnPrint" class="btn btn-sm btn-primary">打印 / PDF</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="relative z-10 mx-auto max-w-6xl px-4 pb-20">
+    <!-- Hero -->
+    <section class="mt-6">
+      <div class="glass ring-glow rounded-3xl p-6 md:p-8 shine" data-aos="fade-up">
+        <div class="flex flex-col md:flex-row gap-6 md:items-end md:justify-between">
+          <div>
+            <div class="badge badge-outline badge-info">Jack · Constantine</div>
+            <h1 class="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight">
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300">
+                我的 2025
+              </span>
+              <span class="opacity-90"> · 总结与展望</span>
+            </h1>
+            <p class="mt-3 opacity-80 leading-relaxed max-w-2xl">
+              <span id="typed"></span>
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="badge badge-outline">复盘</span>
+              <span class="badge badge-outline">成长</span>
+              <span class="badge badge-outline">长期主义</span>
+              <span class="badge badge-outline">更强的 2026</span>
+            </div>
+          </div>
+
+          <!-- Mini KPIs -->
+          <div class="grid grid-cols-2 gap-3 min-w-[280px]">
+            <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="80">
+              <div class="text-xs opacity-60">最NB的事</div>
+              <div class="text-3xl font-extrabold mt-1">
+                <span class="text-sm opacity-70">抖音</span>
+                <span class="counter" data-to="1000" ></span><span class="text-sm opacity-70">粉丝</span>
+              </div>
+            </div>
+            <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="140">
+              <div class="text-xs opacity-60">待在实验室的日子</div>
+              <div class="text-3xl font-extrabold mt-1">
+                <span class="text-4xl font-bold">&infin;</span><span class="text-sm opacity-70"> h</span>
+              </div>
+            </div>
+            <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="200">
+              <div class="text-xs opacity-60">抖音播放量</div>
+              <div class="text-3xl font-extrabold mt-1">
+                <span class="counter" data-to="90095"></span>
+                <!-- <span class="text-4xl font-bold">90095</span><span class="text-sm opacity-70"></span> -->
+              </div>
+            </div>
+            <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="260">
+              <div class="text-xs opacity-60">年度关键词</div>
+              <div class="text-xl font-bold mt-2 text-cyan-200 drop-shadow-glow">学习</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 内容区 -->
+    <section class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div class="lg:col-span-2 grid grid-cols-1 gap-4">
+        <article class="glass ring-glow rounded-3xl p-6" data-aos="fade-up">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold tracking-wide">
+              <i class="fa-solid fa-heart text-cyan-300 mr-2"></i>今年的小作文
+            </h2>
+            <span class="badge badge-info badge-outline">WINS</span>
+          </div>
+          <div class="mt-4 leading-relaxed opacity-85 space-y-3 editable" contenteditable="true">
+            <p><b>致那个青春的自己</b></p>
+            <p>
+              	&emsp;&emsp;2025年对我来说几乎算是最特殊的一年，也是成长最多的一年吧。
+            </p>
+	          <p>&emsp;&emsp;一路走来，从去年12月底和ex分手，后面认识了各种各样的人，不断地社交，去试图与更多的人建立联系，创造机会，打开话题。似乎感觉自己的能力越来越强了。当然了，这种能力不体现在技术上，而是社交上。我的天赋点似乎就点在了社交上，我可以与不同的人迅速找到联系，找到话题，捕捉对方的表情，理解对方所想，预知对方发言。可这似乎也成为了一种诅咒，我可以迅速捕捉对方的厌恶、反感、不感兴趣、想离开，不仅仅是对我，也可以是对任何人的，这让我会想处理这种事。慢慢的脑子里的思考就像混沌系统一样，始终无法得到之后的答案，但计算量却爆炸。可能这就是敏感的代价吧。</p>
+            <p>&emsp;&emsp;但真的，今年遇到的大部分人都很好，遇到了荔枝、自行车、Jellyf1sh、小冯老师、Ivy金兰、钱老师、孙老师、Bilal、Arif、Akram。每个人对我也都很好，作为朋友的我们会探讨各种话题，从校园生活到感情生活再到未来生活，这种无关利益无关身边认识人的聊天才最真诚，也最有意思。感觉这一年我的说话方式也慢慢变了，更喜欢直截了当的表达自己的情绪与想法，但也发现这件事越来越难，因为很难有人能跟你一样可以做到这件事。但还好我认识到了这么多愿意与我沟通的人。同时作为老师的他们也对我很有耐心，陪我解决问题，帮助我，他们人也是真的好，可惜我并不是他们的学生，但应该以后会有很多很深的交集。</p>
+            <p>&emsp;&emsp;今年最大的变化感觉就是我心态变了很多，虽然不能说变得多么nb了，但至少沉稳很多了，面对挫折也没那么急躁，好吧，其实也还在学习中。感觉心态真是一件很重要的事情，78月份那会因为当时做的项目急得哭出来，后面感觉又恶性循环了，担心受怕的。但这种状态下工作是没有办法做好的。Bilal和Arif就跟我说过，We can’t work under pressure. When you’re under pressure, your work can’t be good.说的确实对。后面我也将不断磨练心态吧，感觉如果想读博，这件事是必须的。</p>
+            <p>&emsp;&emsp;诶，其实也好感慨，又一年过去了，去年的这时候在家里琢磨着怎么弄那个Billy Bass Fish，后来那玩意也没弄完就草草收场了，还挺遗憾的。之后那年今晚一个人去了首钢园看了跨年倒计时，那时候真的感觉莫名的孤独，但又感觉好自由。可能这就是代价吧。后来在那一晚加了荔枝的微信，后面成了很好的朋友，也算是非常幸运了，能认识到这样一位挚友。</p>
+            <p>&emsp;&emsp;嗯，同时还有那个我最珍惜的艾莎，今年又是只见了两次，好遗憾好遗憾。一次是3月份吧，逛了圈北建大之后去的荟聚，在宜家的沙发上我们躺了好久好久，在那里聊了好久好久，以至于后面我的嘴干了两周，真的不夸张。那天简直是我最开心的一天，好久没有见了。我对你的感情真的很神奇，是那种跨越时间的、不顾一切的那种。我不知道如何去定义这种感情，但我只知道我只想让你开心、只想在你身后支持你前进，看着你变好。第二次是在6月份，毕业典礼后的那两天你来学校找我，我们拍了很多很多照片，到现在咱们两个的照片都摆在了我实验室的桌子上，每天支撑着我前进。那天之前zxy本来以为我喜欢你，我说不，我俩只是很好很好的朋友。她说知道了。后来在与咱俩待了半天之后，跟我说这个女生在你心里一定很特别，你看她的眼神不是喜欢，是超越喜欢的一种情感，是那种想爱护着她的那种，心里独一份的情感。我说对，她对我是很特别的。可惜那天受伤了，也没有怎么玩就走了。又一年考完研了，你怎么样了，我好想知道。下次见面咱们一定要好好聊，真希望可以多多见面。期待你一直变好。我将永远在你身后支持你。</p>
+            <p>&emsp;&emsp;说到今年，其实更在乎的还有天才小熊猫。今年对他而言是艰难的一年。(开始打关于你的话，我刚挪动了一下咱俩的照片朝向我，那个照片是咱俩高三时候拍的，你是否还记得)这两年得到的坏消息太多了，我不知道我怎么帮你，我只能在背后默默支持你，不管你需要啥，我都会给到你。希望你的心情在新的一年里好起来，有任何苦都告诉我，我会尽全力帮助你。听到你回不来了，我还挺难过的，不知道今年我过生日的那段时间会不会还能聚到一起，太想念曾经的日子。高一的我感觉拥有了世界的一切，拥有你们这些好哥们，有艾莎，有关系好的同班同学，有关系很好的班主任，形象在学校很好，而且大家都很融洽，也很爱运动，脑子也好用，学习还好。每次看到照片，我总能回忆起那时候的咱们。可惜时光不复返，过去只属于过去。希望我们能像那时一样每天只顾着快乐的过日子而不管未来。</p>
+            <p>&emsp;&emsp;现在是2025年12月31日凌晨2：40，我坐在软件楼开着dy直播放着歌.这一年过的好快，似乎刚刚结束考研就直接过去了一年。感觉20岁之后日子过得好快啊，好想慢下来感受生活，现在每天都三点一线的活着，我真希望3年之后的现在，我会是坐在伦敦的某个酒吧，跟Sharon一起喝着小酒，畅谈着那该死的数学，聊着在国外生活的点点滴滴，庆祝着我终于来到了欧洲。</p>
+            <p>&emsp;&emsp;好了，2025的最后一天希望会是开心的度过！加油Jack bro. We shall have the victory we deserve.</p>
+            </p>
+            <div class="alert glass mt-3">
+              <i class="fa-solid fa-quote-left opacity-70"></i>
+              <span>“我不是在追赶时间，而是在选择方向。”</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass ring-glow rounded-3xl p-6" data-aos="fade-up" data-aos-delay="80">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold tracking-wide">
+              <i class="fa-solid fa-lightbulb text-violet-300 mr-2"></i>今年我学到了什么
+            </h2>
+            <span class="badge badge-secondary badge-outline">LESSONS</span>
+          </div>
+          <div class="mt-4 leading-relaxed opacity-85 space-y-3 editable" contenteditable="true">
+            <p>（换成你的真实内容）</p>
+            <p>1）真正的进步来自“可重复的好习惯”。<br>
+               2）把问题写下来，答案会更快出现。<br>
+               3）重要选择要留出缓冲和验证时间。</p>
+          </div>
+        </article>
+
+        <article class="glass ring-glow rounded-3xl p-6" data-aos="fade-up" data-aos-delay="140">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold tracking-wide">
+              <i class="fa-solid fa-timeline text-fuchsia-300 mr-2"></i>关键时刻 · 时间线
+            </h2>
+            <span class="badge badge-accent badge-outline">TIMELINE</span>
+          </div>
+          <div class="mt-4 space-y-3 editable" contenteditable="true">
+            <div class="glass rounded-2xl p-4 border border-white/10">
+              <div class="text-xs opacity-60">Mar</div>
+              <div class="mt-1"><b>一个转折：</b> 开始把注意力从“做更多”转到“做更对”。</div>
+            </div>
+            <div class="glass rounded-2xl p-4 border border-white/10">
+              <div class="text-xs opacity-60">Jul</div>
+              <div class="mt-1"><b>一次突破：</b> 完成一个难但重要的里程碑，信心被重新校准。</div>
+            </div>
+            <div class="glass rounded-2xl p-4 border border-white/10">
+              <div class="text-xs opacity-60">Nov</div>
+              <div class="mt-1"><b>一次告别：</b> 放下不适合的消耗，给自己释放空间。</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass ring-glow rounded-3xl p-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold tracking-wide">
+              <i class="fa-solid fa-rocket text-cyan-300 mr-2"></i>2026 我想怎么做
+            </h2>
+            <span class="badge badge-outline">NEXT</span>
+          </div>
+          <div class="mt-4 leading-relaxed opacity-85 space-y-3 editable" contenteditable="true">
+            <p><b>年度目标（建议 3 条以内）：</b></p>
+            <ul class="list-disc ml-5 space-y-1">
+              <li>目标 1：__________________</li>
+              <li>目标 2：__________________</li>
+              <li>目标 3：__________________</li>
+            </ul>
+            <p><b>执行策略：</b> 每周复盘一次；每月做一次删减；每季度做一次方向校准。</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- 右侧仪表 -->
+      <aside class="glass ring-glow rounded-3xl p-6 lg:sticky lg:top-24 h-fit" data-aos="fade-up" data-aos-delay="120">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold tracking-wide">
+            <i class="fa-solid fa-chart-line text-cyan-300 mr-2"></i>年度概览
+          </h3>
+          <span class="badge badge-outline" id="today"></span>
+        </div>
+
+        <div class="mt-4 glass rounded-2xl p-4 border border-white/10">
+          <div class="text-xs opacity-60 mb-2">自评分布（示例）</div>
+          <canvas id="radar" height="220"></canvas>
+        </div>
+
+        <div class="mt-4 glass rounded-2xl p-4 border border-white/10">
+          <div class="text-xs opacity-60 mb-2">快捷跳转</div>
+          <a class="btn btn-sm btn-secondary glass w-full" href="gallery.html">
+            <i class="fa-regular fa-images mr-2"></i>去照片回忆页
+          </a>
+        </div>
+
+        <!-- <div class="mt-4 text-xs opacity-60">
+          快捷键：<b>P</b> 打印导出 PDF
+        </div> -->
+      </aside>
+    </section>
+
+    <footer class="mt-10 opacity-60 text-sm flex items-center justify-between flex-wrap gap-2" data-aos="fade-up">
+      <div>© <span id="year"></span> · My Year Review</div>
+      <div class="flex gap-3">
+        <!-- <a class="link link-hover" href="#" id="exportHint">提示：浏览器打印可导出 PDF</a> -->
+      </div>
+    </footer>
+  </main>
+
+  <!-- Floating Button -->
+  <div class="fab fixed bottom-6 right-6 z-30">
+    <a href="gallery.html" class="btn btn-primary btn-circle shadow-xl" title="去照片回忆">
+      <i class="fa-regular fa-images"></i>
+    </a>
+  </div>
+
+  <!-- Libs -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    AOS.init({ duration: 1500, once: true, offset: 120 });
+
+    new Typed("#typed", {
+      strings: [
+        "来自2025级软件研究生的年终总结报告。",
+        "不桎于前不止于此。",
+        "加油2026!",
+      ],
+      typeSpeed: 26,
+      backSpeed: 10,
+      backDelay: 1400,
+      loop: true
+    });
+
+    // date
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth()+1).padStart(2,'0');
+    const d = String(now.getDate()).padStart(2,'0');
+    document.getElementById("today").textContent = `${y}-${m}-${d}`;
+    document.getElementById("year").textContent = y;
+
+    
+    // editable toggle
+    /*
+    let editable = true;
+    const btnEdit = document.getElementById("btnEdit");
+    function setEditable(on){
+      editable = on;
+      document.querySelectorAll(".editable").forEach(el=>{
+        el.setAttribute("contenteditable", on ? "true" : "false");
+      });
+      btnEdit.textContent = `可编辑：${on ? "开" : "关"}`;
+    }
+    btnEdit.addEventListener("click", ()=> setEditable(!editable));
+    setEditable(true);
+    */
+    // print
+    /*
+    document.getElementById("btnPrint").addEventListener("click", ()=>window.print());
+    window.addEventListener("keydown",(e)=>{
+      if(e.key.toLowerCase()==="p") window.print();
+    });
+    */
+    // counters
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+    function animateCount(el, to, duration=900){
+      const t0 = performance.now();
+      const from = 0;
+      function frame(t){
+        const p = Math.min(1, (t - t0)/duration);
+        el.textContent = Math.round(from + (to-from)*easeOutCubic(p));
+        if(p<1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    const cIO = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){
+          const el = ent.target;
+          animateCount(el, Number(el.dataset.to||0));
+          cIO.unobserve(el);
+        }
+      })
+    },{threshold:.35});
+    document.querySelectorAll(".counter").forEach(el=>cIO.observe(el));
+
+    // particles
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 70, density: { enable: true, value_area: 900 } },
+        color: { value: ["#22d3ee","#a855f7","#fb7185"] },
+        shape: { type: "circle" },
+        opacity: { value: 0.45, random: true },
+        size: { value: 2.4, random: true },
+        line_linked: { enable: true, distance: 130, color: "#22d3ee", opacity: 0.20, width: 1 },
+        move: { enable: true, speed: 1.2, direction: "none", out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+        modes: { grab: { distance: 170, line_linked: { opacity: 0.35 } }, push: { particles_nb: 3 } }
+      },
+      retina_detect: true
+    });
+
+    // chart
+    const ctx = document.getElementById("radar");
+    new Chart(ctx, {
+      type: "radar",
+      data: {
+        labels: ["成长", "健康", "专注", "关系", "产出", "心态"],
+        datasets: [{
+          label: "2025",
+          data: [82, 68, 86, 72, 80, 74],
+          borderWidth: 2,
+          pointRadius: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { labels: { color: "rgba(255,255,255,.75)" } } },
+        scales: {
+          r: {
+            angleLines: { color: "rgba(255,255,255,.10)" },
+            grid: { color: "rgba(255,255,255,.10)" },
+            pointLabels: { color: "rgba(255,255,255,.70)" },
+            ticks: { display: false }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
