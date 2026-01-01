@@ -47,14 +47,43 @@
     .ring-glow{
       box-shadow: 0 0 0 1px rgba(34,211,238,.25), 0 0 40px rgba(34,211,238,.12);
     }
-    /* 让轮播图高度更“电影感” */
-    .heroFrame{
-      aspect-ratio: 16/9;
-      max-height: 540px;
-    }
-    /* 轮播下方信息面板渐变 */
     .infoGrad{
       background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.65));
+    }
+
+    /* ✅ 左侧大图框：限制最大高度（解决“太大”），但仍保持不裁切 */
+    #carousel{
+      background: rgba(0,0,0,.25);
+      max-height: min(70vh, 520px); /* 你觉得还大：把 520 改小，比如 460 */
+      overflow: hidden;
+    }
+    #carousel .carousel-item{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    #carousel .carousel-item img{
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      background: rgba(0,0,0,.35);
+    }
+
+    /* 右侧索引：图片多了也不挤爆 */
+    #thumbPanel{
+      max-height: 620px;
+      overflow: auto;
+    }
+    #thumbPanel::-webkit-scrollbar{ width: 10px; }
+    #thumbPanel::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,.12);
+      border-radius: 999px;
+      border: 2px solid rgba(0,0,0,0);
+      background-clip: padding-box;
     }
   </style>
 </head>
@@ -63,7 +92,7 @@
   <div id="particles-js"></div>
   <div class="noise"></div>
 
-  <!-- 导航栏：可返回主页 -->
+  <!-- 导航栏 -->
   <div class="sticky top-0 z-30">
     <div class="mx-auto max-w-6xl px-4 py-3">
       <div class="glass ring-glow rounded-2xl px-4 py-3 flex items-center justify-between gap-3">
@@ -99,9 +128,7 @@
           <div>
             <div class="badge badge-outline badge-info">Carousel · Caption · Date</div>
             <h1 class="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300">
-                这一年
-              </span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300">这一年</span>
               <span class="opacity-90"> · 我记住的瞬间</span>
             </h1>
             <p class="mt-3 opacity-75 max-w-2xl leading-relaxed">
@@ -113,193 +140,175 @@
 
         <!-- 轮播区 -->
         <div class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-4 items-start">
-          <!-- 大图 -->
+          <!-- 左：大图 -->
           <div class="lg:col-span-3">
             <div class="relative rounded-3xl overflow-hidden ring-glow border border-white/10">
-              <div class="carousel w-full heroFrame" id="carousel">
-                <!-- Slide 1 -->
+              <div class="carousel w-full" id="carousel">
+
                 <div id="s1" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/7.webp"
-                    class="w-full object-cover" alt="memory 1" />
+                  <img src="./photos/7.webp" alt="memory 1" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-2</div>
                     <div class="text-xl font-bold mt-1" data-title>英国之旅</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      Royal Crescent with Sharon
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>Royal Crescent with Sharon</div>
                   </div>
                 </div>
 
-                <!-- Slide 2 -->
                 <div id="s2" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/14.webp"
-                    class="w-full object-cover" alt="memory 2" />
+                  <img src="./photos/14.webp" alt="memory 2" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-2</div>
                     <div class="text-xl font-bold mt-1" data-title>英国之旅</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      雨中的伦敦
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>雨中的伦敦</div>
                   </div>
                 </div>
 
-                <!-- Slide 3 -->
                 <div id="s3" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/15.webp"
-                    class="w-full object-cover" alt="memory 3" />
+                  <img src="./photos/15.webp" alt="memory 3" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-2</div>
                     <div class="text-xl font-bold mt-1" data-title>英国之旅</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      火车上与Sharon做数独
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>火车上与 Sharon 做数独</div>
                   </div>
                 </div>
 
-                <!-- Slide 4 -->
                 <div id="s4" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/16.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/16.webp" alt="memory 4" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-2</div>
                     <div class="text-xl font-bold mt-1" data-title>英国之旅</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      剑桥
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>剑桥</div>
                   </div>
                 </div>
+
                 <div id="s5" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/17.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/17.webp" alt="memory 5" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-2</div>
                     <div class="text-xl font-bold mt-1" data-title>英国之旅</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      约克Gin store
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>约克 Gin store</div>
                   </div>
                 </div>
+
                 <div id="s6" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/18.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/18.webp" alt="memory 6" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-2</div>
                     <div class="text-xl font-bold mt-1" data-title>英国之旅</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      曼彻斯特大学
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>曼彻斯特大学</div>
                   </div>
                 </div>
+
                 <div id="s7" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/11.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/11.webp" alt="memory 7" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-4</div>
                     <div class="text-xl font-bold mt-1" data-title>好看的我</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      喜欢这个小帽子
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>喜欢这个小帽子</div>
                   </div>
                 </div>
-                <div id="s7" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/4.webp"
-                    class="w-full object-cover" alt="memory 4" />
-                  <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
-                    <div class="text-xs opacity-70" data-date>2025-6</div>
-                    <div class="text-xl font-bold mt-1" data-title>毕业</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      笑得比我还开心的qj
-                    </div>
-                  </div>
-                </div>
+
                 <div id="s8" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/5.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/4.webp" alt="memory 8" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-6</div>
                     <div class="text-xl font-bold mt-1" data-title>毕业</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      源氏牛神
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>笑得比我还开心的 qj</div>
                   </div>
                 </div>
 
                 <div id="s9" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/8.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/5.webp" alt="memory 9" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-6</div>
                     <div class="text-xl font-bold mt-1" data-title>毕业</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      艾莎睡觉,我学习
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>源氏牛神</div>
                   </div>
                 </div>
 
                 <div id="s10" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/9.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/8.webp" alt="memory 10" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-6</div>
                     <div class="text-xl font-bold mt-1" data-title>毕业</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      我跟艾莎一块学习
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>艾莎睡觉，我学习</div>
                   </div>
                 </div>
 
                 <div id="s11" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/10.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/9.webp" alt="memory 11" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-6</div>
                     <div class="text-xl font-bold mt-1" data-title>毕业</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      艾莎和我在图书馆
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>我跟艾莎一块学习</div>
                   </div>
                 </div>
-                
+
                 <div id="s12" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/12.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/10.webp" alt="memory 12" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-6</div>
                     <div class="text-xl font-bold mt-1" data-title>毕业</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      天才小熊猫与郭大侠
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>艾莎和我在图书馆</div>
                   </div>
                 </div>
 
                 <div id="s13" class="carousel-item relative w-full">
-                  <img
-                    src="./photos/1.webp"
-                    class="w-full object-cover" alt="memory 4" />
+                  <img src="./photos/12.webp" alt="memory 13" />
                   <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
                     <div class="text-xs opacity-70" data-date>2025-6</div>
                     <div class="text-xl font-bold mt-1" data-title>毕业</div>
-                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>
-                      天才小熊猫与郭大侠
-                    </div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>天才小熊猫与郭大侠</div>
                   </div>
                 </div>
+
+                <div id="s14" class="carousel-item relative w-full">
+                  <img src="./photos/2.webp" alt="memory 14" />
+                  <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
+                    <div class="text-xs opacity-70" data-date>2025-7</div>
+                    <div class="text-xl font-bold mt-1" data-title>成都旅游</div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>冯老师 + Midori</div>
+                  </div>
+                </div>
+
+                <div id="s15" class="carousel-item relative w-full">
+                  <img src="./photos/1.webp" alt="memory 15" />
+                  <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
+                    <div class="text-xs opacity-70" data-date>2025-8</div>
+                    <div class="text-xl font-bold mt-1" data-title>酒</div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>与萌老师喝完酒后看到坦克...</div>
+                  </div>
+                </div>
+
+                <div id="s16" class="carousel-item relative w-full">
+                  <img src="./photos/3.webp" alt="memory 16" />
+                  <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
+                    <div class="text-xs opacity-70" data-date>2025-10</div>
+                    <div class="text-xl font-bold mt-1" data-title>酒</div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>与萌老师喝醉前的拍照...</div>
+                  </div>
+                </div>
+
+                <div id="s17" class="carousel-item relative w-full">
+                  <img src="./photos/13.webp" alt="memory 17" />
+                  <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
+                    <div class="text-xs opacity-70" data-date>2025-12</div>
+                    <div class="text-xl font-bold mt-1" data-title>The four guys who will change the world</div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>Bilal Akram Arif & Me</div>
+                  </div>
+                </div>
+
+                <div id="s18" class="carousel-item relative w-full">
+                  <img src="./photos/6.webp" alt="memory 18" />
+                  <div class="absolute inset-x-0 bottom-0 p-5 infoGrad">
+                    <div class="text-xs opacity-70" data-date>2025</div>
+                    <div class="text-xl font-bold mt-1" data-title>北建大</div>
+                    <div class="mt-1 opacity-80 leading-relaxed" data-desc>跟艾莎一块学习</div>
+                  </div>
+                </div>
+
               </div>
 
-              <!-- 左右按钮 -->
               <div class="absolute left-3 right-3 top-1/2 -translate-y-1/2 flex justify-between">
                 <button class="btn btn-circle glass" id="prevBtn" aria-label="prev">
                   <i class="fa-solid fa-chevron-left"></i>
@@ -310,20 +319,18 @@
               </div>
             </div>
 
-            <!-- 下方：当前图的文字块（同步展示） -->
             <div class="mt-4 glass ring-glow rounded-3xl p-5" data-aos="fade-up" data-aos-delay="120">
               <div class="flex items-center justify-between gap-3 flex-wrap">
                 <div>
                   <div class="text-xs opacity-60" id="curDate">—</div>
                   <div class="text-2xl font-extrabold mt-1" id="curTitle">—</div>
                 </div>
-                <div class="badge badge-outline" id="curIndex">1 / 4</div>
+                <div class="badge badge-outline" id="curIndex">1 / 1</div>
               </div>
               <div class="mt-3 opacity-80 leading-relaxed" id="curDesc">—</div>
             </div>
           </div>
 
-          <!-- 右侧：缩略图 + 列表（点选跳转） -->
           <div class="lg:col-span-2">
             <div class="glass ring-glow rounded-3xl p-5" data-aos="fade-up" data-aos-delay="80">
               <div class="flex items-center justify-between">
@@ -331,39 +338,11 @@
                 <span class="badge badge-info badge-outline">CLICK</span>
               </div>
 
-              <div class="mt-4 grid grid-cols-2 gap-3">
-                <button class="glass rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-300/40 transition" data-jump="1">
-                  <img src="https://images.unsplash.com/photo-1520975693411-b3f4f2f3d5c6?auto=format&fit=crop&w=600&q=80" class="w-full h-24 object-cover" alt="">
-                  <div class="p-2 text-left">
-                    <div class="text-xs opacity-60">2025-03-18</div>
-                    <div class="text-sm font-semibold">方向校准</div>
-                  </div>
-                </button>
-                <button class="glass rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-300/40 transition" data-jump="2">
-                  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" class="w-full h-24 object-cover" alt="">
-                  <div class="p-2 text-left">
-                    <div class="text-xs opacity-60">2025-07-09</div>
-                    <div class="text-sm font-semibold">里程碑</div>
-                  </div>
-                </button>
-                <button class="glass rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-300/40 transition" data-jump="3">
-                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" class="w-full h-24 object-cover" alt="">
-                  <div class="p-2 text-left">
-                    <div class="text-xs opacity-60">2025-10-22</div>
-                    <div class="text-sm font-semibold">陪伴</div>
-                  </div>
-                </button>
-                <button class="glass rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-300/40 transition" data-jump="4">
-                  <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" class="w-full h-24 object-cover" alt="">
-                  <div class="p-2 text-left">
-                    <div class="text-xs opacity-60">2025-12-06</div>
-                    <div class="text-sm font-semibold">沉淀</div>
-                  </div>
-                </button>
-              </div>
-
-              <div class="mt-4 text-xs opacity-60">
-                你把图片换成本地：比如 <b>photos/001.jpg</b>；日期与描述改成你的内容即可。
+              <div id="thumbPanel" class="mt-4">
+                <div id="thumbGrid" class="grid grid-cols-2 gap-3"></div>
+                <div class="mt-4 text-xs opacity-60">
+                  你把图片换成本地：比如 <b>photos/001.jpg</b>；日期与描述改成你的内容即可。
+                </div>
               </div>
             </div>
           </div>
@@ -380,14 +359,12 @@
     </footer>
   </main>
 
-  <!-- Libs -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
   <script>
     AOS.init({ duration: 700, once: true, offset: 120 });
 
-    // particles
     particlesJS("particles-js", {
       particles: {
         number: { value: 60, density: { enable: true, value_area: 900 } },
@@ -406,11 +383,10 @@
       retina_detect: true
     });
 
-    // footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ===== Carousel logic (sync caption + arrows + autoplay) =====
-    const slides = ["s1","s2","s3","s4"];
+    const slides = [...document.querySelectorAll("#carousel .carousel-item")].map(el => el.id);
+
     let idx = 0;
     const carousel = document.getElementById("carousel");
     const hint = document.getElementById("slideHint");
@@ -438,18 +414,38 @@
       readMeta(idx);
     }
 
-    // init
+    function buildThumbs(){
+      const grid = document.getElementById("thumbGrid");
+      grid.innerHTML = "";
+
+      slides.forEach((id, i) => {
+        const el = document.getElementById(id);
+        const img = el.querySelector("img");
+        const date = el.querySelector("[data-date]")?.textContent?.trim() || "";
+        const title = el.querySelector("[data-title]")?.textContent?.trim() || `第 ${i+1} 张`;
+
+        const btn = document.createElement("button");
+        btn.className = "glass rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-300/40 transition text-left";
+        btn.type = "button";
+        btn.addEventListener("click", () => go(i));
+
+        btn.innerHTML = `
+          <img src="${img?.getAttribute("src") || ""}" class="w-full h-24 object-cover" alt="">
+          <div class="p-2">
+            <div class="text-xs opacity-60">${date || "&nbsp;"}</div>
+            <div class="text-sm font-semibold line-clamp-1">${title}</div>
+          </div>
+        `;
+        grid.appendChild(btn);
+      });
+    }
+
+    buildThumbs();
     readMeta(idx);
 
     document.getElementById("prevBtn").addEventListener("click", ()=>go(idx-1));
     document.getElementById("nextBtn").addEventListener("click", ()=>go(idx+1));
 
-    // thumbnail jumps
-    document.querySelectorAll("[data-jump]").forEach(btn=>{
-      btn.addEventListener("click", ()=>go(Number(btn.dataset.jump)-1));
-    });
-
-    // autoplay
     let auto = true;
     let timer = null;
     const btnAuto = document.getElementById("btnAuto");
@@ -472,7 +468,6 @@
     btnAuto.addEventListener("click", ()=>setAuto(!auto));
     setAuto(true);
 
-    // 如果用户手动滚动轮播区域，也同步 idx（轻量：用 IntersectionObserver）
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(ent=>{
         if(ent.isIntersecting){
@@ -482,6 +477,7 @@
         }
       });
     }, { root: carousel, threshold: 0.6 });
+
     slides.forEach(id => io.observe(document.getElementById(id)));
   </script>
 </body>
